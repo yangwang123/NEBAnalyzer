@@ -2,7 +2,7 @@ import os
 import numpy as np
 from ase import io
 
-from .analysis import Analyzer
+from . import Analyzer
 
 
 class VaspAnalyzer(Analyzer):
