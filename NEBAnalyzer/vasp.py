@@ -6,8 +6,16 @@ from . import Analyzer
 
 
 class VaspAnalyzer(Analyzer):
-    
-    
+    '''
+    Analyzer for VASP NEB calculations
+
+    Parameters:
+    -----------
+    ddir: str
+        Directory of the NEB calculation
+    read_neb: bool
+        Whether to read the NEB calculation
+    '''
     def __init__(self, ddir: str, read_neb: bool=True):
 
         super().__init__(ddir, read_neb)

@@ -5,7 +5,13 @@ import nglview as nv
 
 
 def show_atoms(atoms) -> nv.NGLWidget:
-    
+    '''Show atoms in the unit cell
+
+    Parameters
+    ----------
+    atoms: ase.Atoms
+        Atoms object to be shown
+    '''
     try:
         widget = nv.show_ase(atoms)
     except Exception:
@@ -20,7 +26,15 @@ def show_atoms(atoms) -> nv.NGLWidget:
 
 
 def show_E(E_list: list, coords: list) -> None:
+    '''Show energy profile
     
+    Parameters
+    ----------
+    E_list: list
+        List of energies
+    coords: list
+        List of coordinates
+    '''
     coords_spline = np.arange(0, coords[-1], 0.001)
     E_spline = CubicSpline(coords, E_list, bc_type='natural')(coords_spline)
     E_mark = [(np.abs(coords_spline - val)).argmin() for val in coords]

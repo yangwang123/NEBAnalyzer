@@ -5,7 +5,17 @@ from typing import List
 
 
 def center_atoms(atoms: List[ase.Atoms], center_indices: list=slice(None), n_image: int=0) -> List[ase.Atoms]:
+    '''Center atoms in the unit cell
     
+    Parameters
+    ----------
+    atoms: list of ase.Atoms
+        List of atoms objects
+    center_indices: list
+        Indices of atoms to be centered
+    n_image: int
+        Index of image to be centered
+    '''
     a = atoms[n_image][center_indices]
     mean_xyz = a.get_center_of_mass()
     

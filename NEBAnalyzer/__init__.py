@@ -8,10 +8,15 @@ from .utils.units import eV_to_kcal_per_mol
 class Analyzer:
 
     '''
-    Template analyer for various packages
+    Template analyer for various QM codes
+
+    Parameters:
+    -----------
+    ddir: str
+        Directory of the NEB calculation
+    read_neb: bool
+        Whether to read the NEB calculation
     '''
-    
-    
     def __init__(self, ddir: str, read_neb: bool=True):
 
         self.ddir = ddir
