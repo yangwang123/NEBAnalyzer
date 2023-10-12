@@ -6,7 +6,6 @@ from .utils.units import eV_to_kcal_per_mol
 
 
 class Analyzer:
-
     '''
     Template analyer for various QM codes
 
@@ -59,7 +58,15 @@ class Analyzer:
     
     
     def get_min_force(self) -> (int, float):
-            
+        '''Get minimum force and its index
+
+        Returns:
+        --------
+        ndx: int
+            Index of the minimum force
+        f: float
+            Magnitude of the minimum force
+        '''
         ndx = np.argmin(np.max(self.forces, axis=-1))
         f = self.forces[ndx, :]
         
@@ -67,7 +74,22 @@ class Analyzer:
     
     
     def get_E(self, ndx: int=-1, ref: str='min') -> (list, list):
+        '''Get energy and coordinates for plotting
         
+        Parameters:
+        -----------
+        ndx: int
+            Pathway index
+        ref: str
+            Reference energy
+        
+        Returns:
+        --------
+        E_list: list
+            List of energies
+        coords: list
+            List of coordinates
+        '''
         E_list = [self.E_ini] + list(self.E_all[ndx, :]) + [self.E_fin]
         if ref == 'min':
             E_ref = np.min(E_list)
@@ -85,13 +107,29 @@ class Analyzer:
     
     
     def plot_E(self, ndx: int=-1, ref: str='min') -> None:
-        
+        '''Plot energy profile
+
+        Parameters:
+        -----------
+        ndx: int
+            Pathway index
+        ref: str
+            Reference energy to set zero
+        '''
         E_list, coords = self.get_E(ndx=ndx, ref=ref)
         show_E(E_list, coords)
         
         
     def vis_pathway(self, ndx: int=-1, initial: bool=False) -> nv.NGLWidget:
+        '''Visualize pathway
         
+        Parameters:
+        -----------
+        ndx: int
+            Pathway index
+        initial: bool
+            Whether to show the initial state
+        '''
         atoms = self.get_pathway(ndx, initial)
         
         return show_atoms(atoms)

@@ -31,7 +31,18 @@ class VaspAnalyzer(Analyzer):
     
     @staticmethod
     def get_E_image(file: str) -> list:
+        '''Get the total energy of each image
         
+        Parameters:
+        -----------
+        file: str
+            OUTCAR file of the image
+        
+        Returns:
+        --------
+        Es: list
+            Total energy of each image
+        '''
         try:
             atoms = io.read(file, format='vasp-out', index=slice(None))
             return [a.get_total_energy() for a in atoms]
@@ -47,19 +58,19 @@ class VaspAnalyzer(Analyzer):
         
         
     def get_E_ini(self) -> None:
-        
+        '''Get energy of the first image'''
         file = os.path.join(self.ddir, f'00/OUTCAR')
         self.E_ini = self.get_E_image(file)[-1]
         
         
     def get_E_fin(self) -> None:
-        
+        '''Get energy of the last image'''
         file = os.path.join(self.ddir, f'{self.n_images-1:02d}/OUTCAR')
         self.E_fin = self.get_E_image(file)[-1]
         
     
     def get_E_all(self) -> None:
-        
+        '''Get energy of intermediate images'''
         E_all = []
         for i in range(self.n_images):
             if i == 0 or i == self.n_images-1:
@@ -72,7 +83,20 @@ class VaspAnalyzer(Analyzer):
         
     @staticmethod
     def get_dists_image(file: str, prev: bool=False) -> list:
+        '''Get the distance between the current image and the previous or next image
         
+        Parameters:
+        -----------
+        file: str
+            OUTCAR file of the image
+        prev: bool
+            Whether to get the distance to the previous image
+        
+        Returns:
+        --------
+        dists: list
+            Distance to the previous or next image
+        '''
         dists = []
         with open(file, 'r') as f:
             for line in f:
@@ -88,7 +112,7 @@ class VaspAnalyzer(Analyzer):
     
     
     def get_dists_all(self) -> None:
-        
+        '''Get distances between images'''
         dists_all = []
         for i in range(self.n_images):
             if i == 0 or i == self.n_images-1:
@@ -103,7 +127,18 @@ class VaspAnalyzer(Analyzer):
     
     @staticmethod
     def get_forces_image(file) -> list:
+        '''Get the maximum force of an image
         
+        Parameters:
+        -----------
+        file: str
+            OUTCAR file of the image
+        
+        Returns:
+        --------
+        forces: list
+            Maximum force at each iteration
+        '''
         with open(file, 'r') as f:
             lines = f.readlines()
         forces = []
@@ -115,7 +150,7 @@ class VaspAnalyzer(Analyzer):
     
     
     def get_forces(self) -> None:
-        
+        '''Get maximum forces of intermediate images'''
         forces_list = []
         for i in range(self.n_images):
             if i == 0 or i == self.n_images-1:
@@ -127,7 +162,20 @@ class VaspAnalyzer(Analyzer):
     
     
     def get_pathway(self, ndx: int=-1, initial: bool=False) -> list:
+        '''Get the pathway of the NEB calculation
         
+        Parameters:
+        -----------
+        ndx: int
+            Pathway index
+        initial: bool
+            Whether to get the initial pathway
+            
+        Returns:
+        --------
+        atoms: list
+            List of ASE atoms objects
+        '''
         atoms = []
         for i in range(self.n_images):
             if i == 0 or i == self.n_images-1 or initial:
