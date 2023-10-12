@@ -8,9 +8,9 @@ from . import Analyzer
 class VaspAnalyzer(Analyzer):
     
     
-    def __init__(self, ddir: str):
+    def __init__(self, ddir: str, read_neb: bool=True):
 
-        super().__init__(ddir)
+        super().__init__(ddir, read_neb)
         
     
     def get_n_images(self) -> None:

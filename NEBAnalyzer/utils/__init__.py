@@ -4,7 +4,7 @@ from ase.geometry import wrap_positions
 from typing import List
 
 
-def center_atoms(atoms: List(ase.Atoms), center_indices: list=slice(None), n_image: int=0) -> List(ase.Atoms):
+def center_atoms(atoms: List[ase.Atoms], center_indices: list=slice(None), n_image: int=0) -> List[ase.Atoms]:
     
     a = atoms[n_image][center_indices]
     mean_xyz = a.get_center_of_mass()

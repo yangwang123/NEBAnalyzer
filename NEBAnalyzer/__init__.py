@@ -12,16 +12,17 @@ class Analyzer:
     '''
     
     
-    def __init__(self, ddir: str):
+    def __init__(self, ddir: str, read_neb: bool=True):
 
         self.ddir = ddir
         
         self.get_n_images()
-        self.get_E_ini()
-        self.get_E_fin()
-        self.get_E_all()
-        self.get_dists_all()
-        self.get_forces()
+        if read_neb:
+            self.get_E_ini()
+            self.get_E_fin()
+            self.get_E_all()
+            self.get_dists_all()
+            self.get_forces()
     
     
     def get_n_images(self) -> None:
