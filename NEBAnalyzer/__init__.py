@@ -117,7 +117,7 @@ class Analyzer:
             Reference energy to set zero
         '''
         E_list, coords = self.get_E(ndx=ndx, ref=ref)
-        show_E(E_list, coords)
+        return show_E(E_list, coords)
         
         
     def vis_pathway(self, ndx: int=-1, initial: bool=False) -> nv.NGLWidget:

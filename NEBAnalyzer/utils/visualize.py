@@ -46,4 +46,5 @@ def show_E(E_list: list, coords: list) -> None:
     fig.tight_layout()
     fig.set_dpi(100)
 
+    return fig, ax
 
