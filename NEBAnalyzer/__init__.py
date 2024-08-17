@@ -117,7 +117,7 @@ class Analyzer:
         return show_E(E_list, coords)
         
         
-    def vis_pathway(self, ndx: int=-1, initial: bool=False) -> nv.NGLWidget:
+    def vis_pathway(self, ndx: int=-1) -> nv.NGLWidget:
         '''Visualize pathway
         
         Parameters:
@@ -127,6 +127,6 @@ class Analyzer:
         initial: bool
             Whether to show the initial state
         '''
-        atoms = self.get_pathway(ndx, initial)
+        atoms = self.get_pathway(ndx)
         return show_atoms(atoms)
 
