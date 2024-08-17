@@ -148,15 +148,13 @@ class VaspAnalyzer(Analyzer):
             forces_list.append(self.get_forces_image(file))
         self.forces = np.array(forces_list).T
     
-    def get_pathway(self, ndx: int=-1, initial: bool=False) -> List[ase.Atoms]:
+    def get_pathway(self, ndx: int=-1) -> List[ase.Atoms]:
         '''Get the pathway of the NEB calculation
         
         Parameters:
         -----------
         ndx: int
             Pathway index
-        initial: bool
-            Whether to get the initial pathway
             
         Returns:
         --------
@@ -165,8 +163,11 @@ class VaspAnalyzer(Analyzer):
         '''
         atoms = []
         for i in range(self.n_images):
-            if i == 0 or i == self.n_images-1 or initial:
+            if i == 0 or i == self.n_images-1 or ndx == 0:
                 file = os.path.join(self.ddir, f'{i:02d}/POSCAR')
+                a = io.read(file, format='vasp')
+            elif ndx == -1:
+                file = os.path.join(self.ddir, f'{i:02d}/CONTCAR')
                 a = io.read(file, format='vasp')
             else:
                 file = os.path.join(self.ddir, f'{i:02d}/OUTCAR')
