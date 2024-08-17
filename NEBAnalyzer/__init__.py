@@ -51,9 +51,9 @@ class Analyzer:
         '''Get forces of all images; override this method'''
         return
     
-    def get_pathway(self, ndx: int=-1, initial: bool=False) -> List:
+    def get_pathway(self, ndx: int=-1) -> None:
         '''Get pathway for visualization; override this method'''
-        return []
+        return
     
     def get_min_force(self) -> Tuple[int, float]:
         '''Get minimum force and its index
