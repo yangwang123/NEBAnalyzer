@@ -1,5 +1,6 @@
 import numpy as np
 import nglview as nv
+from typing import Tuple, List
 
 from .utils.visualize import show_atoms, show_E
 from .utils.units import eV_to_kcal_per_mol 
@@ -17,9 +18,7 @@ class Analyzer:
         Whether to read the NEB calculation
     '''
     def __init__(self, ddir: str, read_neb: bool=True):
-
         self.ddir = ddir
-        
         self.get_n_images()
         if read_neb:
             self.get_E_ini()
@@ -27,37 +26,36 @@ class Analyzer:
             self.get_E_all()
             self.get_dists_all()
             self.get_forces()
-    
-    
+     
     def get_n_images(self) -> None:
+        '''Get the number of images in the NEB calculation; override this method'''
         return
         
-    
     def get_E_ini(self) -> None:
+        '''Get energy of the first image; override this method'''
         return
-        
         
     def get_E_fin(self) -> None:
+        '''Get energy of the last image; override this method'''
         return
         
-    
     def get_E_all(self) -> None:
+        '''Get energy of all images; override this method'''
         return
-    
     
     def get_dists_all(self) -> None:
+        '''Get distances of all images; override this method'''
         return
-    
     
     def get_forces(self) -> None:
+        '''Get forces of all images; override this method'''
         return
     
-    
-    def get_pathway(self, ndx: int=-1, initial: bool=False) -> list:
+    def get_pathway(self, ndx: int=-1, initial: bool=False) -> List:
+        '''Get pathway for visualization; override this method'''
         return []
     
-    
-    def get_min_force(self) -> (int, float):
+    def get_min_force(self) -> Tuple[int, float]:
         '''Get minimum force and its index
 
         Returns:
@@ -72,8 +70,7 @@ class Analyzer:
         
         return ndx, f
     
-    
-    def get_E(self, ndx: int=-1, ref: str='min') -> (list, list):
+    def get_E(self, ndx: int=-1, ref: str='min') -> Tuple[list, list]:
         '''Get energy and coordinates for plotting
         
         Parameters:
@@ -131,7 +128,5 @@ class Analyzer:
             Whether to show the initial state
         '''
         atoms = self.get_pathway(ndx, initial)
-        
         return show_atoms(atoms)
-
 
