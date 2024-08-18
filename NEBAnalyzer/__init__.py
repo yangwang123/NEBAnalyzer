@@ -70,7 +70,7 @@ class Analyzer:
         
         return ndx, f
     
-    def get_E(self, ndx: int=-1, ref: str='min') -> Tuple[list, list]:
+    def get_E(self, ndx: int=-1, ref: str='ini') -> Tuple[list, list]:
         '''Get energy and coordinates for plotting
         
         Parameters:
@@ -78,7 +78,7 @@ class Analyzer:
         ndx: int
             Pathway index
         ref: str
-            Reference energy
+            Reference energy to set zero
         
         Returns:
         --------
@@ -92,8 +92,10 @@ class Analyzer:
             E_ref = np.min(E_list)
         elif ref == 'fin':
             E_ref = E_list[-1]
-        else:
+        elif ref == 'ini':
             E_ref = E_list[0]
+        else:
+            raise ValueError('Invalid reference')
         E_list = np.array(E_list) - E_ref
         E_list = list(E_list*eV_to_kcal_per_mol)
         
