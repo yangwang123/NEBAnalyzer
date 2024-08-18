@@ -76,7 +76,7 @@ class VaspAnalyzer(Analyzer):
         self.E_all = np.array(E_all).T
     
     @staticmethod
-    def get_dists_image(file: str, prev: bool=False) -> list:
+    def get_dists_image(file: str, prev: bool=False) -> List[float]:
         '''Get the distance between the current image and the previous or next image
         
         Parameters:
@@ -117,7 +117,7 @@ class VaspAnalyzer(Analyzer):
         self.dists_all = np.array(dists_all).T
     
     @staticmethod
-    def get_forces_image(file) -> list:
+    def get_forces_image(file: str) -> List[float]:
         '''Get the maximum force of an image
         
         Parameters:

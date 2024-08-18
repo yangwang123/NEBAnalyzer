@@ -70,7 +70,7 @@ class Analyzer:
         
         return ndx, f
     
-    def get_E(self, ndx: int=-1, ref: str='ini') -> Tuple[list, list]:
+    def get_E(self, ndx: int=-1, ref: str='ini') -> Tuple[List[float], List[float]]:
         '''Get energy and coordinates for plotting
         
         Parameters:
